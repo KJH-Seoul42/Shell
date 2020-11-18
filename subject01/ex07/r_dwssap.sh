@@ -1,1 +1,1 @@
-cat /etc/passwd | sed '/^#/d' | sed '1d' | cut -d : -f 1 | rev | sort -r |  awk -v USTART=$FT_LINE1 'NR >= USTART { print $0 }' | awk -v UEND=$FT_LINE2 'NR <= UEND { print $0 }' | sed 's/$/,/' | tr '\n' ' ' | sed 's/, $/./'
+cat /etc/passwd | sed '/^#/d' | awk 'NR%2 == 0' | cut -d : -f 1 | rev | sort -r |  awk -v USTART=$FT_LINE1 'NR >= USTART { print $0 }' | awk -v UEND=$FT_LINE2 'NR <= UEND { print $0 }' | sed 's/$/,/' | tr '\n' ' ' | sed 's/, $/./'
